@@ -24,7 +24,7 @@ const Table: FC<TableProps> = ({ paymentHistories }) => {
           paymentHistories={paymentHistories}
         />
       </table>
-      {paymentHistories.length === 0 && (
+      {paymentHistories?.length === 0 && (
         <div className="w-full h-[50vh] text-[#D9B899] border border-gray-100 flex items-center justify-center">
           Not found
         </div>
