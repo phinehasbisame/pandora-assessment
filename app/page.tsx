@@ -31,7 +31,7 @@ const HomePage = () => {
             </Link>
             <Link
               href={`/about`}
-              className="bg-[#D9B899] p-2 text-white rounded-md font-light text-xs md:text-sm"
+              className="bg-[#9a826b] p-2 text-white rounded-md font-light text-xs md:text-sm"
             >
               About developer
             </Link>

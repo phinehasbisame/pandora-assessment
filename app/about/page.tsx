@@ -16,11 +16,9 @@ const AboutPage = () => {
           <p className="text-sm md:text-base text-gray-600">
             I am Phinehas Osei-Tutu. I am a graduate of Kwame Nkrumah University
             of Science and Technology, Kumasi, where I studied Computer
-            Engineering for my undergrad and currently on a contract with
-            SeveighTech. My studies made me to have passion for software
-            engineering and that encouraged me to get into frontend development.
+            Engineering for my undergrad and currently on a contract expiring on March ending with Bisame. My studies made me to have passion for software engineering and that encouraged me to get into frontend development.
             This helped me to gain valuable coding experience in programming
-            language such as JavaScript utilizing its framework, React and
+            language such as JavaScript utilizing its framework, Next.js React and
             TailwindCSS to build intuitive user interface. My resilient,
             dependable and problem solving skills set me apart from the rest.
             With my coding experience and collaborative nature, I can work with
