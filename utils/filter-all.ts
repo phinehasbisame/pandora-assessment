@@ -8,6 +8,8 @@ const filterAll = (filter: Filter, paymentHistories: PaymentHistory[]) => {
   const startDate = filter.startDate;
   const endDate = filter.endDate;
 
+  if (!paymentHistories) filteredData = [];
+
   if (searchByName) {
     filteredData = filterName(filter.searchByName, filteredData);
   }

@@ -9,7 +9,10 @@ import useModal from "@/hooks/useModal";
 import Pagination from "./Pagination";
 import useMainContext from "@/hooks/useMainContext";
 
-const Table: FC<TableProps> = ({ paymentHistories }) => {
+const Table: FC<TableProps & { error: string }> = ({
+  error,
+  paymentHistories,
+}) => {
   const { openModal, paymentId, handleOpenModal, handlePaymentId } = useModal();
   const { currentPage } = useMainContext();
   return (
@@ -24,6 +27,11 @@ const Table: FC<TableProps> = ({ paymentHistories }) => {
           paymentHistories={paymentHistories}
         />
       </table>
+      {(paymentHistories?.length === 0) && error && (
+        <div className="w-full h-[50vh] text-[#D9B899] border border-gray-100 flex items-center justify-center">
+          Error occurred fetching data
+        </div>
+      )}
       {paymentHistories?.length === 0 && (
         <div className="w-full h-[50vh] text-[#D9B899] border border-gray-100 flex items-center justify-center">
           Not found

@@ -20,12 +20,12 @@ const useFetch = () => {
   const apiUrl = API_ENDPOINTS.payment.allPayments;
   console.log(apiUrl);
 
-  const { data, isLoading } = useSWR(apiUrl, paymentFetcher, {
+  const { data, isLoading, error } = useSWR(apiUrl, paymentFetcher, {
     revalidateIfStale: false,
     shouldRetryOnError: true,
     errorRetryCount: 3,
   });
-  return { data, isLoading };
+  return { data, isLoading, error };
 };
 
 export default useFetch;
