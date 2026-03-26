@@ -14,7 +14,7 @@ export default function PaymentHistoryPage() {
   if (isLoading) {
     return (
       <div className="w-screen h-[80vh] flex items-center justify-center">
-        <AiOutlineLoading size={40} color="orange" className="animate-spin" />
+        <AiOutlineLoading size={25}  className="animate-spin text-[#D9B899]" />
       </div>
     );
   }
