@@ -9,8 +9,6 @@ const useFilter = () => {
     endDate: "",
   });
 
-  console.log(filter);
-
   return {
     filter,
     setFilter,

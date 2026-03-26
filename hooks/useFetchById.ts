@@ -21,7 +21,6 @@ const useFetchById = (paymentId: string) => {
     paymentId,
   );
 
-  console.log(apiUrl);
 
   const { data, isLoading } = useSWR(apiUrl, paymentFetcher, {
     revalidateIfStale: false,

@@ -2,6 +2,7 @@
 import { PaymentHistory } from "@/interfaces";
 import { apiClient } from "@/libs/axios";
 import { API_ENDPOINTS } from "@/utils/api-endpoints";
+import axios from "axios";
 import toast from "react-hot-toast";
 import useSWR from "swr";
 
@@ -9,7 +10,7 @@ const useFetch = () => {
   const paymentFetcher = async (
     url: string,
   ): Promise<PaymentHistory[] | null> => {
-    const response = await apiClient.get(url);
+    const response = await axios.get(url);
     if (!response.data) {
       toast.error("Failed to fetch data");
     }
@@ -18,9 +19,8 @@ const useFetch = () => {
   };
 
   const apiUrl = API_ENDPOINTS.payment.allPayments;
-  console.log(apiUrl);
 
-  const { data, isLoading, error } = useSWR(apiUrl, paymentFetcher, {
+  const { data, isLoading, error } = useSWR("/api/payment-history", paymentFetcher, {
     revalidateIfStale: false,
     shouldRetryOnError: true,
     errorRetryCount: 3,

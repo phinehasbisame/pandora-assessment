@@ -4,7 +4,7 @@ import { TableProps } from "@/interfaces";
 import { FC } from "react";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
-import Modal from "./Modal";
+import Modal from "../modal/Modal";
 import useModal from "@/hooks/useModal";
 import Pagination from "./Pagination";
 import useMainContext from "@/hooks/useMainContext";
@@ -16,7 +16,6 @@ const Table: FC<TableProps & { error: { message: string } }> = ({
 }) => {
   const { openModal, paymentId, handleOpenModal, handlePaymentId } = useModal();
   const { currentPage } = useMainContext();
-  console.log(error.message);
   return (
     <section className="my-2 w-full">
       <table className="w-full">

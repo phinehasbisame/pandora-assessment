@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="bg-[#D9B899] text-[#4A3E31] py-3 px-3 md:px-[10%] w-screen flex items-center justify-between">
+    <header className="bg-[#D9B899] text-[#4A3E31] py-3 px-3 md:px-[10%] w-screen flex items-center justify-between sticky top-0 inset-x-0">
       <Link href={`/`} className="flex items-center gap-2 font-medium">
         <Image
           src={`/logo.webp`}

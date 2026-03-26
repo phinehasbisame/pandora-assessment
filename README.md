@@ -1,36 +1,200 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **MJ Pandora Payment System (Next.js)**
 
-## Getting Started
+## Overview
 
-First, run the development server:
+The **MJ Pandora Payment System** is a modern web application built with **Next.js** to provide a seamless interface for managing and tracking payment transactions. It focuses on delivering a responsive, intuitive, and performant user experience for viewing payment history, monitoring transaction statuses, and interacting with financial data.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+### **Payment History Management**
+
+View a structured list of all transactions with relevant details such as date, and customer name.
+
+### **Date Filtering**
+
+Filter payments within a specific date range for better data analysis and tracking.
+
+### **Pagination**
+
+Efficiently handle large datasets with optimized pagination and ellipsis navigation.
+
+### **Responsive UI**
+
+Fully responsive design optimized for desktop and mobile devices.
+
+### **Reusable Components**
+
+Modular architecture with reusable UI components (tables, modals, pagination).
+
+### **API Integration**
+
+## Tech Stack
+
+- **Framework:** Next.js
+- **Language:** TypeScript (type safety)
+- **Styling:** Tailwind CSS
+- **State Management:** Context API, and React Hooks (useState)
+- **Data Fetching:** Axios, and SWR (controlled data fetching)
+- **Deployment:** Vercel
+
+## Project Structure
+
+```
+/app
+  /about → About page
+    page.tsx
+  /payment-history  → Payment history page
+    layout.tsx →
+    page.tsx →
+  globals.css  → all main css resides here
+  not-found.tsx  → not found page
+  layout.tsx
+  page.tsx  → entry page (homepage)
+
+/components → all reusable components are kept here
+  /common
+    Footer.tsx
+    Header.tsx
+    Input.tsx
+  FilterTable.tsx
+  HeaderContent.tsx
+  Modal.tsx
+  ModalContent.tsx
+  Pagination.tsx
+  Table.tsx
+  TableBody.tsx
+  TableHeader.tsx
+  Modal.tsx
+
+/const → all constants files are store here
+  index.ts
+
+/context → all context files are kept here
+  MainContext.tsx
+
+/hooks → reusable logics are kept here through creating custom hooks
+  useFetch.ts
+  useFetchById.ts
+  useFilter.ts
+  useMainContext.ts
+  useModal.ts
+
+/interfaces → all typescript typing and interfaces logics are kept here
+  index.ts
+
+/lib →
+  axios.ts → a global data fetching setup
+
+/public
+
+/utils → helper logic
+  api-endpoints.ts → all api endpoints are accessible here
+  filter-all.ts → it combines both filter-by-date and filter-by-name to give a final search result
+  filter-by-date.ts → it helps filter payment history by date
+  filter-by-name.ts → it helps filter payment history by name
+  format-date.ts → it helps format date to easily read date
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API Handling
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+SWR alongside with axios by creating a global axios instance apiClient from ApiClient class
 
-## Learn More
+```ts
+const useFetch = () => {
+  const paymentFetcher = async (
+    url: string,
+  ): Promise<PaymentHistory[] | null> => {
+    const response = await apiClient.get(url);
+    if (!response.data) {
+      toast.error("Failed to fetch data");
+    }
 
-To learn more about Next.js, take a look at the following resources:
+    return response.data as PaymentHistory[];
+  };
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  const apiUrl = API_ENDPOINTS.payment.allPayments;
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  const { data, isLoading, error } = useSWR(apiUrl, paymentFetcher, {
+    revalidateIfStale: false,
+    shouldRetryOnError: true,
+    errorRetryCount: 3,
+  });
+  return { data, isLoading, error };
+};
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Pagination Logic
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pagination is implemented with:
+
+- Dynamic page calculation
+- Controlled navigation (Prev / Next)
+
+## 📅 Date Formatting
+
+Dates are formatted using a utility function:
+
+```ts
+formatDate(date);
+```
+
+## Filtering
+
+Payments can be filtered by date range, and customer name:
+
+```ts
+filterName(searchName, paymentHistories);
+```
+
+```ts
+filterByDate(data, startDate, endDate);
+```
+
+## UI/UX Design Decisions
+
+- Neutral color scheme for financial clarity
+- Clean table layout for readability
+- Sticky headers for better navigation
+
+## Known Challenges
+
+### **CORS Issues**
+Not resolved yet
+
+### **Large Dataset Handling**
+
+Managed via pagination and optimized rendering.
+
+## 📦 Getting Started
+
+Clone project from Github using the command `git clone https://github.com/phinehasbisame/pandora-assessment.git`
+
+Navigate to clone project and open your terminal.
+Type the following commands to start the project
+
+```bash
+npm install
+npm run dev
+```
+
+Create an environment file in the root directory maybe .env.local and set the env variable
+
+```
+NEXT_PUBLIC_BASE_URL=https://**.*/sales-api
+where **.* represents the hostname
+```
+
+Visit:
+
+```
+http://localhost:3000
+```
+
+## Author
+
+**Phinehas Osei-Tutu**
+Frontend Developer (Next.js, React, TypeScript)

@@ -1,6 +1,6 @@
 "use client";
-import FilterTable from "@/components/FilterTable";
-import Table from "@/components/Table";
+import FilterTable from "@/components/filter/FilterTable";
+import Table from "@/components/table/Table";
 import useFetch from "@/hooks/useFetch";
 import useFilter from "@/hooks/useFilter";
 import { PaymentHistory } from "@/interfaces";
@@ -18,8 +18,6 @@ export default function PaymentHistoryPage() {
       </div>
     );
   }
-
-  console.log(error);
 
   return (
     <div className="py-3 px-3 md:px-[10%] space-y-3">

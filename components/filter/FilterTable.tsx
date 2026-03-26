@@ -1,6 +1,6 @@
 "use client";
 import { Dispatch, FC, SetStateAction } from "react";
-import Input from "./common/Input";
+import Input from "../common/Input";
 import { Filter } from "@/interfaces";
 
 const FilterTable: FC<{
