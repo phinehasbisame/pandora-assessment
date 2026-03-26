@@ -10,12 +10,13 @@ import Pagination from "./Pagination";
 import useMainContext from "@/hooks/useMainContext";
 import { MdOutlineErrorOutline } from "react-icons/md";
 
-const Table: FC<TableProps & { error: string }> = ({
+const Table: FC<TableProps & { error: { message: string } }> = ({
   error,
   paymentHistories,
 }) => {
   const { openModal, paymentId, handleOpenModal, handlePaymentId } = useModal();
   const { currentPage } = useMainContext();
+  console.log(error.message);
   return (
     <section className="my-2 w-full">
       <table className="w-full">
@@ -28,10 +29,11 @@ const Table: FC<TableProps & { error: string }> = ({
           paymentHistories={paymentHistories}
         />
       </table>
-      {(paymentHistories?.length === 0) && error && (
-        <div className="w-full h-[50vh] text-red-600 border border-gray-100 flex flex-col items-center justify-center">
+      {!paymentHistories && error && (
+        <div className="w-full h-[50vh] text-red-600 text-xs font-light md:text-sm border border-gray-100 flex flex-col items-center justify-center">
           <MdOutlineErrorOutline size={40} />
-          Error occurred fetching data
+          <span>Error occurred fetching data</span>
+          <span>{error.message}</span>
         </div>
       )}
       {paymentHistories?.length === 0 && (

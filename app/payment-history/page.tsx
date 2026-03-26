@@ -27,10 +27,12 @@ export default function PaymentHistoryPage() {
       <FilterTable filter={filter} onFilter={setFilter} />
       <Table
         error={error}
-        paymentHistories={filterAll(
-          filter,
-          paymentHistories as PaymentHistory[],
-        )}
+        paymentHistories={
+          filterAll(
+            filter,
+            paymentHistories as PaymentHistory[],
+          ) as PaymentHistory[]
+        }
       />
     </div>
   );
