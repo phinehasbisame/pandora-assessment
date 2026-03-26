@@ -99,14 +99,27 @@ Modular architecture with reusable UI components (tables, modals, pagination).
 
 ## API Handling
 
-SWR alongside with axios by creating a global axios instance apiClient from ApiClient class
+SWR alongside with axios by creating a global axios instance apiClient from ApiClient class and API routes
+
+API routes
+
+```ts
+export async function GET() {
+  const endpoints = API_ENDPOINTS.payment.allPayments;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const apiUrl = `${baseUrl}${endpoints}`;
+
+  const res = await axios.get(apiUrl);
+  return Response.json(res.data);
+}
+```
 
 ```ts
 const useFetch = () => {
   const paymentFetcher = async (
     url: string,
   ): Promise<PaymentHistory[] | null> => {
-    const response = await apiClient.get(url);
+    const response = await axios.get(url);
     if (!response.data) {
       toast.error("Failed to fetch data");
     }
@@ -114,13 +127,15 @@ const useFetch = () => {
     return response.data as PaymentHistory[];
   };
 
-  const apiUrl = API_ENDPOINTS.payment.allPayments;
-
-  const { data, isLoading, error } = useSWR(apiUrl, paymentFetcher, {
-    revalidateIfStale: false,
-    shouldRetryOnError: true,
-    errorRetryCount: 3,
-  });
+  const { data, isLoading, error } = useSWR(
+    "/api/payment-history",
+    paymentFetcher,
+    {
+      revalidateIfStale: false,
+      shouldRetryOnError: true,
+      errorRetryCount: 3,
+    },
+  );
   return { data, isLoading, error };
 };
 ```
@@ -163,7 +178,8 @@ filterByDate(data, startDate, endDate);
 ## Known Challenges
 
 ### **CORS Issues**
-Not resolved yet
+
+Made use of API routes to fix CORS issues
 
 ### **Large Dataset Handling**
 

@@ -1,7 +1,7 @@
 "use client";
 import { PaymentHistory } from "@/interfaces";
-import { apiClient } from "@/libs/axios";
-import { API_ENDPOINTS } from "@/utils/api-endpoints";
+// import { apiClient } from "@/libs/axios";
+// import { API_ENDPOINTS } from "@/utils/api-endpoints";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useSWR from "swr";
@@ -18,7 +18,7 @@ const useFetch = () => {
     return response.data as PaymentHistory[];
   };
 
-  const apiUrl = API_ENDPOINTS.payment.allPayments;
+  // const apiUrl = API_ENDPOINTS.payment.allPayments;
 
   const { data, isLoading, error } = useSWR("/api/payment-history", paymentFetcher, {
     revalidateIfStale: false,
