@@ -32,7 +32,7 @@ const Table: FC<TableProps> = ({ paymentHistories }) => {
       {openModal && (
         <Modal paymentId={paymentId} onCloseModal={handleOpenModal} />
       )}
-      <Pagination totalSize={paymentHistories.length} />
+      <Pagination totalSize={paymentHistories?.length} />
     </section>
   );
 };
