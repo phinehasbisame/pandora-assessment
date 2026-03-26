@@ -8,7 +8,7 @@ const AboutPage = () => {
         alt="picture"
         width={100}
         height={100}
-        className="h-[50vh] md:h-[40vh] w-60 object-cover rounded-xl"
+        className="h-[40vh] w-60 object-cover rounded-xl"
       />
       <article className="space-y-5">
         <div>
