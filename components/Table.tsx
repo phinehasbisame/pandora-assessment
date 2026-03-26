@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import useModal from "@/hooks/useModal";
 import Pagination from "./Pagination";
 import useMainContext from "@/hooks/useMainContext";
+import { MdOutlineErrorOutline } from "react-icons/md";
 
 const Table: FC<TableProps & { error: string }> = ({
   error,
@@ -28,7 +29,8 @@ const Table: FC<TableProps & { error: string }> = ({
         />
       </table>
       {(paymentHistories?.length === 0) && error && (
-        <div className="w-full h-[50vh] text-[#D9B899] border border-gray-100 flex items-center justify-center">
+        <div className="w-full h-[50vh] text-red-600 border border-gray-100 flex flex-col items-center justify-center">
+          <MdOutlineErrorOutline size={40} />
           Error occurred fetching data
         </div>
       )}
